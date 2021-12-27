@@ -44,12 +44,15 @@ CREATE TABLE IF NOT EXISTS public.provider
 
 CREATE TABLE IF NOT EXISTS public.package_assembly
 (
-    car_id integer NOT NULL,
     line_id integer NOT NULL,
-    component_id integer NOT NULL,
-    qty_component integer NOT NULL,
+    component_id integer NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS public.component_assembly
+(
     sub_id integer NOT NULL,
-    qty_sub integer NOT NULL
+    component_id integer NOT NULL,
+    qty integer
 );
 
 ALTER TABLE IF EXISTS public.car
@@ -77,14 +80,14 @@ ALTER TABLE IF EXISTS public.package_assembly
 
 
 ALTER TABLE IF EXISTS public.package_assembly
-    ADD CONSTRAINT "FK_car_id" FOREIGN KEY (car_id)
-    REFERENCES public.car (id) MATCH SIMPLE
+    ADD FOREIGN KEY (component_id)
+    REFERENCES public.component (id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
 
 
-ALTER TABLE IF EXISTS public.package_assembly
+ALTER TABLE IF EXISTS public.component_assembly
     ADD CONSTRAINT "FK_component_id" FOREIGN KEY (component_id)
     REFERENCES public.component (id) MATCH SIMPLE
     ON UPDATE NO ACTION
@@ -92,8 +95,8 @@ ALTER TABLE IF EXISTS public.package_assembly
     NOT VALID;
 
 
-ALTER TABLE IF EXISTS public.package_assembly
-    ADD CONSTRAINT "FK_sub_id" FOREIGN KEY (sub_id)
+ALTER TABLE IF EXISTS public.component_assembly
+    ADD CONSTRAINT "FK_sub_component_id" FOREIGN KEY (sub_id)
     REFERENCES public.sub_component (id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION

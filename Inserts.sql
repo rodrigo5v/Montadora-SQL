@@ -52,11 +52,20 @@ VALUES
 	('Sensitive CORP ',10),('BASE SA',8),('BASE SA',7),
 	('BASE SA',12);
 	
-INSERT INTO component_assembly(sub_id,component_id,qty_sub)
+INSERT INTO component_assembly(sub_id,component_id,qty)
 VALUES
 	(1,1,1),(2,1,1),(4,1,1),(3,1,4),(5,1,1),(6,1,1),(7,1,1),(8,1,1),(12,1,1),
 	(1,2,1),(2,2,1),(3,2,4),(9,2,1),(6,2,1),(7,2,1),(5,2,1),
 	(9,3,1),(10,3,3),(5,3,1),
 	(11,4,1),
-	(15,5,7),(14,5,4),(13,5,1);
+	(15,5,1),(14,5,4),(13,5,1);
+	
+SELECT * FROM component;
+
+INSERT INTO package_assembly(line_id,component_id)
+VALUES
+	(1,2),(2,1),(2,3),(2,4),(2,5),
+	(3,1),(3,3),(3,5),
+	(4,1),(4,3),(4,5),
+	(5,2),(5,3),(5,4),(5,5);
 
